@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Android Studio & Gradle
+.gradle/
+build/
+app/build/
+*.iml
+.idea/
+local.properties
+captures/
+.externalNativeBuild/
+.cxx/
+output.json
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# ML Models & Checkpoints
+*.pkl
+*.joblib
+*.onnx
+*.pt
+*.h5
+
+# Data directory contents (keep directories via .gitkeep)
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Operating System & IDE junk
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+*.swo
