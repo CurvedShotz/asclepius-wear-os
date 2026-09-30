@@ -6,6 +6,21 @@ Asclepius is a lightweight, context-aware wearable health monitoring system desi
 
 **MVP in development**
 
+## Local Development: Simulated Readings
+
+Start the backend from the repository root:
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r backend/requirements.txt
+python -m uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+Check `http://localhost:8000/health` or open `http://localhost:8000/docs` to send a test reading with an ISO-8601 `timestamp` and a `scenario`. `GET /readings` shows readings received since the backend started; history is in memory and is cleared when the server stops. The Wear OS emulator reaches the computer running the backend at `10.0.2.2`, so the app posts to `http://10.0.2.2:8000/readings`. Keep the backend running while testing. The app's cleartext HTTP setting is for local development only; production should use HTTPS.
+
+To build and launch the app, open `wear-app/` in Android Studio, sync Gradle, and run the `app` configuration on a Wear OS emulator. Tap the scenario name to switch between **Normal Day** and **Resting Anomaly**, then tap **Start Simulation**. Each reading is sent in order with a one-second delay; confirm the watch reaches `Connected - complete` and inspect `GET /readings` or the backend terminal. The project currently has no Gradle wrapper, so use Android Studio's bundled Gradle to build it.
+
 ## High-Level Architecture
 
 The system consists of four primary components:
