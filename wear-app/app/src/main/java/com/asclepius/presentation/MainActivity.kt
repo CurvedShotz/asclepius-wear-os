@@ -21,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.wear.compose.material.MaterialTheme
 import androidx.wear.compose.material.Button
 import androidx.wear.compose.material.Text
@@ -119,26 +120,34 @@ fun WearApp() {
             horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "Asclepius", style = MaterialTheme.typography.title2)
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "Select scenario: ${selectedScenario.name}",
+            Column(
                 modifier = Modifier.clickable(enabled = !isRunning) {
                     selectedScenarioIndex = (selectedScenarioIndex + 1) % SIMULATION_SCENARIOS.size
                     currentReading = null
                     readingNumber = 0
                     connectionStatus = "Not connected"
                 },
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.caption2
-            )
-            Spacer(modifier = Modifier.height(4.dp))
+                horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
+            ) {
+                Text(text = "Asclepius", style = MaterialTheme.typography.title2)
+                Text(
+                    text = "Scenario: ${selectedScenario.name}",
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.caption2
+                )
+            }
             Text(
                 text = "${currentReading?.heartRate ?: "--"} BPM",
                 style = MaterialTheme.typography.title1
             )
-            Text(text = currentReading?.activityContext ?: "Ready")
-            Text(text = "Reading $readingNumber / ${selectedScenario.readings.size}")
+            Text(
+                text = currentReading?.activityContext ?: "Ready",
+                style = MaterialTheme.typography.body2
+            )
+            Text(
+                text = "Reading $readingNumber / ${selectedScenario.readings.size}",
+                style = MaterialTheme.typography.caption2
+            )
             Text(
                 text = connectionStatus,
                 textAlign = TextAlign.Center,
@@ -181,7 +190,13 @@ fun WearApp() {
                     }
                 }
             ) {
-                Text(text = if (isRunning) "Sending..." else "Start Simulation")
+                Text(
+                    text = if (isRunning) "Sending..." else "Start\nSimulation",
+                    textAlign = TextAlign.Center,
+                    fontSize = 8.sp,
+                    lineHeight = 9.sp,
+                    maxLines = 2
+                )
             }
         }
     }
